@@ -1,8 +1,5 @@
-package util;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 class Contact{
 
@@ -122,22 +119,10 @@ class Contact{
 public class AddressBook 
 {
 	static ArrayList<Contact> list = new ArrayList<Contact>();
-	public static AddressBook addressBook = new AddressBook();
-    public static HashMap<String, AddressBook> addressBooks = new HashMap<>();
-
 
 	static Scanner sc = new Scanner(System.in);
 	public static String check = "Y";
-    
-	public static void AddAddressBook(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter name of new address book");
-        String name = sc.nextLine() ;
-        addressBook  = new AddressBook();
-        addressBooks.put(name, addressBook) ;
-        System.out.println("New addressbook added ");       
-             
-    }
+	
 	private void AddDetails()
 	{
 		System.out.println("How many contats do you want to enter? ");
@@ -223,7 +208,7 @@ public class AddressBook
 		System.out.println("Welcome To Address Book Problem\n");
 		
 		AddressBook address = new AddressBook();
-		AddAddressBook();
+		
 		address.AddDetails();
 		
 		System.out.print("Do you want to Edit this Contact ? (y/n)");
@@ -257,3 +242,5 @@ public class AddressBook
 		
 	}
 }
+
+
