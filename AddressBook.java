@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 
@@ -124,11 +126,12 @@ public class AddressBook
 {
 	static ArrayList<Contact> list = new ArrayList<Contact>();
 	public static AddressBook addressBook = new AddressBook(null);
-    public static Contact contact=new Contact();
+    	public static Contact contact=new Contact();
 
 	static Scanner sc = new Scanner(System.in);
 	public static ArrayList<AddressBook> book = new ArrayList<>();
-
+	public HashMap<String,String> citydict=new HashMap<>();
+	public HashMap<String,String> statedict=new HashMap<>();
 
 	public AddressBook(String str) {
 		
@@ -180,6 +183,48 @@ public class AddressBook
 			if(city.equals(list.get(i).getState()))
 			{
 				System.out.println(list.get(i));
+			}
+		}
+	}
+
+	public void PersonCityDictionary()
+	{
+		for(AddressBook address: book)
+		{
+			for(Contact contact:address.list)
+			{
+				String name=contact.getFirstName();
+				citydict.put(name, contact.getCity());
+			}
+		}
+		System.out.println("Enter the city name to search for contacts: ");
+		String city=sc.next();
+		for(Entry<String, String> entry:citydict.entrySet())
+		{
+			if(city.equals(entry.getValue()))
+			{
+				System.out.println("Names form "+entry.getValue()+" city are: "+entry.getKey());
+			}
+		}
+	}
+	
+	public void PersonStateDictionary()
+	{
+		for(AddressBook address: book)
+		{
+			for(Contact contact:address.list)
+			{
+				String name=contact.getFirstName();
+				statedict.put(name, contact.getState());
+			}
+		}
+		System.out.println("Enter the city name to search for contacts: ");
+		String state=sc.next();
+		for(Entry<String, String> entry:statedict.entrySet())
+		{
+			if(state.equals(entry.getValue()))
+			{
+				System.out.println("Names form"+entry.getValue()+"State is: "+entry.getKey());
 			}
 		}
 	}
