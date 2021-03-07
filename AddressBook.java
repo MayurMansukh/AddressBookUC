@@ -1,5 +1,17 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map.Entry;
+
+class ContactAlreadyExistsException extends Exception
+{
+	public ContactAlreadyExistsException(String message)
+	{
+		super(message);
+	}
+}
 
 class Contact{
 
@@ -11,7 +23,10 @@ class Contact{
 	private String zip;
 	private String phoneNumber;
 	private String email;
-
+	public Contact()
+	{
+		
+	}
 	public Contact(String firstName, String lastName, String address, String city , String state,String zip2, String phoneNumber2, String email){
 
 		this.firstName = firstName;
@@ -119,14 +134,28 @@ class Contact{
 public class AddressBook 
 {
 	static ArrayList<Contact> list = new ArrayList<Contact>();
+	public static AddressBook addressBook = new AddressBook();
+    public static HashMap<String, AddressBook> addressBooks = new HashMap<>();
+    public static Contact contact=new Contact();
 
 	static Scanner sc = new Scanner(System.in);
-	public static String check = "Y";
+	    
+	public static void AddAddressBook(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter name of new address book");
+        String name = sc.nextLine() ;
+        addressBook  = new AddressBook();
+        addressBooks.put(name, addressBook) ;
+        System.out.println("New addressbook added ");       
+             
+    }
 	
 	private void AddDetails()
 	{
 		System.out.println("How many contats do you want to enter? ");
 		int num=sc.nextInt();
+		list.add(0,new Contact("Mayur", "Mansukh", "ghatkoper", "Mumbai", "mharastra", "400070", "9967435647", "masnuk04@gmail.com"));
+		
 		for(int i=0;i<num;i++)
 		{	
 			System.out.println("Enter FirstName");
@@ -134,7 +163,7 @@ public class AddressBook
 			System.out.println("Enter LastName");
 			String lastName=sc.next();
 			System.out.println("Enter Address");
-			String area=sc.next();
+			String address=sc.next();
 			System.out.println("Enter CityName");
 			String city=sc.next();
 			System.out.println("Enter StateName");
@@ -145,10 +174,19 @@ public class AddressBook
 			String phoneNumber=sc.next();
 			System.out.println("Enter Email");
 			String email=sc.next();
-
-			list.add( new Contact(firstName, lastName, area, city, state, zip, phoneNumber, email));
-			System.out.println(list);
-		}
+			if(!firstName.equals(list.get(0).getFirstName()))
+			{
+				list.add( new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email));
+				System.out.println(list);
+			}
+			else 
+			{
+				System.out.println("You have already entered this contact");
+				break;
+			}
+			addressBook.toString();
+		}	
+		addressBook.toString();
 	}
 	
 	public static String Edit() 
@@ -202,45 +240,33 @@ public class AddressBook
 		}
 	}
 	
-	
 	public static void main(String[] args) 
 	{
 		System.out.println("Welcome To Address Book Problem\n");
 		
 		AddressBook address = new AddressBook();
-		
+	//	AddAddressBook();
 		address.AddDetails();
 		
-		System.out.print("Do you want to Edit this Contact ? (y/n)");
-		check=sc.next();
-		if(check.equalsIgnoreCase("y")) 
+		System.out.print("1.Add AddressBook 2.Delete 3.Edit");
+		int check=sc.nextInt();
+		switch(check)
 		{
-			System.out.println(Edit());
+		case 1:
+			AddAddressBook();
+			break;
+		case 2:
+			Delete();
+			for(int i=0; i<list.size(); i++)
+			{
+					System.out.println(list.get(i));
+			}
+			break;
+		case  3:
+			Edit();
+			for(int i=0; i<list.size(); i++)
+			{
+					System.out.println(list.get(i));
+			}
+			break;
 		}
-		else
-		{
-			System.out.println("Done");
-		}
-		for(int i=0; i<list.size(); i++)
-		{
-			System.out.println(list.get(i));
-		}
-		System.out.print("Do you want to Delete this Contact ? (y/n)");
-		check=sc.next();
-		if(check.equalsIgnoreCase("y")) 
-		{
-			System.out.println(Delete());
-		}
-		else
-		{
-			System.out.println("Done");
-		}
-		for(int i=0; i<list.size(); i++)
-		{
-			System.out.println(list.get(i));
-		}
-		
-	}
-}
-
-
