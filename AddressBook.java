@@ -171,6 +171,18 @@ public class AddressBook
 			}
 		}
 	}
+     public void Searchpersonwithstate()
+	{
+		System.out.println("Enter city for the contact info: ");
+		String city=sc.next();
+		for(int i=0;i<list.size();i++)
+		{
+			if(city.equals(list.get(i).getState()))
+			{
+				System.out.println(list.get(i));
+			}
+		}
+	}
 	private void AddDetails()
 	{
 		System.out.println("How many contats do you want to enter? ");
