@@ -1,8 +1,8 @@
 import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map.Entry;
-
-
-
+import java.util.Scanner;
 class Contact{
 
     private String firstName;
@@ -131,7 +131,7 @@ public class AddressBook
     public static ArrayList<AddressBook> book = new ArrayList<>();
     public HashMap<String,String> citydict=new HashMap<>();
     public HashMap<String,String> statedict=new HashMap<>();
-
+    public int count=0;
     public AddressBook(String str) {
 
     }
@@ -208,8 +208,11 @@ public class AddressBook
             if(city.equals(entry.getValue()))
             {
                 System.out.println("Names form "+entry.getValue()+" city are: "+entry.getKey());
+                count++;
             }
+
         }
+        System.out.println("Count of contacts in "+city+" city is: "+count);
     }
 
     public void PersonStateDictionary()
@@ -229,12 +232,15 @@ public class AddressBook
             if(state.equals(entry.getValue()))
             {
                 System.out.println("Names form"+entry.getValue()+"State is: "+entry.getKey());
+                count++;
             }
+
         }
+        System.out.println("Count of contacts in "+state+" state is: "+count);
     }
 
 
-    private void AddDetails() {
+    void AddDetails() {
         System.out.println("How many contats do you want to enter? ");
         int num = sc.nextInt();
        //list.add( new Contact("Mayur", "Mansukh", "ghatkoper", "Mumbai", "maharastra", "400070", "9967453722", "Mansukh04@gmail.com"));
@@ -325,7 +331,7 @@ public class AddressBook
 
         AddressBook address = new AddressBook(null);
 
-        System.out.print("1.Add AddressBook \n2.Add Contact \n3.Delete \n4.Edit \n5.Search_Person_with_city \n6.Search_Person_with_State \n7.PersonCityDictionary \n8.PersonStateDictionary");
+        System.out.print("1.Add AddressBook \n2.Add Contact \n3.Delete \n4.Edit \n5.Search_Person_with_city \n6.Search_Person_with_State \n7.PersonCityDictionary+Count \n8.PersonStateDictionary+count");
         int check=sc.nextInt();
         switch(check)
         {
