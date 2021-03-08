@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Scanner;
+import java.util.stream.Collectors;
 
 
 class Contact{
@@ -138,9 +137,9 @@ public class AddressBook
     }
 
     public static void defaultBook() {
-        book.add(new AddressBook("default address book"));
         book.add(new AddressBook("Address Book 1"));
         book.add(new AddressBook("Address Book 2"));
+        book.add(new AddressBook("Address Book 3"));
     }
 
     public void DefaultContact()
@@ -174,18 +173,23 @@ public class AddressBook
             }
         }
     }
-    public void Searchpersonwithstate()
-    {
+    public void Searchpersonwithstate() {
         System.out.println("Enter State for the contact info: ");
-        String city=sc.next();
-        for(int i=0;i<list.size();i++)
-        {
-            if(city.equals(list.get(i).getState()))
-            {
-                System.out.println(list.get(i));
-            }
+        String city = sc.next();
+
+        Optional<Contact> answer=list.stream().findAny();
+        if (answer.equals(city)){
+            System.out.println(answer.get());
         }
+        else
+        {
+            System.out.println("no values");
+        }
+
+
+
     }
+
 
     public void PersonCityDictionary()
     {
@@ -227,6 +231,36 @@ public class AddressBook
                 System.out.println("Names form"+entry.getValue()+"State is: "+entry.getKey());
             }
         }
+    }
+
+    public void sortbyCity()
+    {
+        Comparator<Contact> list1 = Comparator.comparing(Contact::getState);
+        System.out.println("\n After Sorting the contact details by city : \n");
+        list.stream()
+                .sorted(list1)
+                .forEach(System.out::println);
+
+    }
+
+    public void sortbyState()
+    {
+        Comparator<Contact> list1 = Comparator.comparing(Contact::getCity);
+        System.out.println("\n After Sorting the contact details by State : \n");
+        list.stream()
+                .sorted(list1)
+                .forEach(System.out::println);
+
+    }
+
+    public void sortbyZip()
+    {
+        Comparator<Contact> list1 = Comparator.comparing(Contact::getZip);
+        System.out.println("\n After Sorting the contact details by Zip : \n");
+        list.stream()
+                .sorted(list1)
+                .forEach(System.out::println);
+
     }
     private void AddDetails()
     {
@@ -324,7 +358,9 @@ public class AddressBook
 
         AddressBook address = new AddressBook(null);
 
-        System.out.print("1.Add AddressBook \n2.Add Contact \n3.Delete \n4.Edit \n5.Search_Person_with_city \n6.Search_Person_with_State \n7.PersonCityDictionary \n8.PersonStateDictionary");
+        System.out.print("1.Add AddressBook \n2.Add Contact \n3.Delete \n4.Edit \n5.Search_Person_with_city " +
+                "\n6.Search_Person_with_State \n7.PersonCityDictionary \n8.PersonStateDictionary" +
+                "\n9.sort_by_City\n10.sort_by_State\n11.sort_by_Zip");
         int check=sc.nextInt();
         switch(check)
         {
@@ -369,6 +405,18 @@ public class AddressBook
                 address.DefaultContact();
                 address.PersonStateDictionary();
                 break;
+            case 9:
+                address.defaultBook();
+                address.DefaultContact();
+                address.sortbyCity();
+            case 10:
+                address.defaultBook();
+                address.DefaultContact();
+                address.sortbyState(); 
+            case 11:
+                address.defaultBook();
+                address.DefaultContact();
+                address.sortbyZip(); 
             default:
                 System.out.println("Invalid choice");
 
