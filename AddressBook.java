@@ -243,7 +243,7 @@ public class AddressBook
     void AddDetails() {
         System.out.println("How many contats do you want to enter? ");
         int num = sc.nextInt();
-       //list.add( new Contact("Mayur", "Mansukh", "ghatkoper", "Mumbai", "maharastra", "400070", "9967453722", "Mansukh04@gmail.com"));
+       list.add( new Contact("Mayur", "Mansukh", "ghatkoper", "Mumbai", "maharastra", "400070", "9967453722", "Mansukh04@gmail.com"));
 
         for (int i = 0; i < num; i++) {
             System.out.println("Enter FirstName");
@@ -262,17 +262,20 @@ public class AddressBook
             String phoneNumber = sc.next();
             System.out.println("Enter Email");
             String email = sc.next();
-
-            list.add(new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email));
+            if(!firstName.equals(list.get(0).getFirstName()))
+            {
+                list.add( new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email));
+                System.out.println(list);
+            }
+            else
+            {
+                System.out.println("You have already entered this contact");
+                break;
+            }
+            addressBook.toString();
         }
-            System.out.println(list);
-                Comparator<Contact> list1 = Comparator.comparing(Contact::getFirstName);
-                System.out.println("\n After Sorting the contact details are: \n");
-                list.stream()
-                    .sorted(list1)
-                    .forEach(System.out::println);
-        }
-
+        addressBook.toString();
+    }
 
     public static String Edit()
     {
