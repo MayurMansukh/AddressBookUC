@@ -1,6 +1,6 @@
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
+
 
 
 class Contact{
@@ -233,73 +233,40 @@ public class AddressBook
         }
     }
 
-    public void sortbyCity()
-    {
-        Comparator<Contact> list1 = Comparator.comparing(Contact::getState);
-        System.out.println("\n After Sorting the contact details by city : \n");
-        list.stream()
-                .sorted(list1)
-                .forEach(System.out::println);
 
-    }
-
-    public void sortbyState()
-    {
-        Comparator<Contact> list1 = Comparator.comparing(Contact::getCity);
-        System.out.println("\n After Sorting the contact details by State : \n");
-        list.stream()
-                .sorted(list1)
-                .forEach(System.out::println);
-
-    }
-
-    public void sortbyZip()
-    {
-        Comparator<Contact> list1 = Comparator.comparing(Contact::getZip);
-        System.out.println("\n After Sorting the contact details by Zip : \n");
-        list.stream()
-                .sorted(list1)
-                .forEach(System.out::println);
-
-    }
-    private void AddDetails()
-    {
+    private void AddDetails() {
         System.out.println("How many contats do you want to enter? ");
-        int num=sc.nextInt();
-        list.add(0,new Contact("Mayur", "Mansukh", "ghatkoper", "Mumbai", "maharastra", "400070", "9967453722", "Mansukh04@gmail.com"));
+        int num = sc.nextInt();
+       //list.add( new Contact("Mayur", "Mansukh", "ghatkoper", "Mumbai", "maharastra", "400070", "9967453722", "Mansukh04@gmail.com"));
 
-        for(int i=0;i<num;i++)
-        {
+        for (int i = 0; i < num; i++) {
             System.out.println("Enter FirstName");
-            String firstName=sc.next();
+            String firstName = sc.next();
             System.out.println("Enter LastName");
-            String lastName=sc.next();
+            String lastName = sc.next();
             System.out.println("Enter Address");
-            String address=sc.next();
+            String address = sc.next();
             System.out.println("Enter CityName");
-            String city=sc.next();
+            String city = sc.next();
             System.out.println("Enter StateName");
-            String state=sc.next();
+            String state = sc.next();
             System.out.println("Enter ZipCode");
-            String zip=sc.next();
+            String zip = sc.next();
             System.out.println("Enter PhoneNumber");
-            String phoneNumber=sc.next();
+            String phoneNumber = sc.next();
             System.out.println("Enter Email");
-            String email=sc.next();
-            if(!firstName.equals(list.get(0).getFirstName()))
-            {
-                list.add( new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email));
-                System.out.println(list);
-            }
-            else
-            {
-                System.out.println("You have already entered this contact");
-                break;
-            }
-            addressBook.toString();
+            String email = sc.next();
+
+            list.add(new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email));
         }
-        addressBook.toString();
-    }
+            System.out.println(list);
+                Comparator<Contact> list1 = Comparator.comparing(Contact::getFirstName);
+                System.out.println("\n After Sorting the contact details are: \n");
+                list.stream()
+                    .sorted(list1)
+                    .forEach(System.out::println);
+        }
+
 
     public static String Edit()
     {
@@ -358,9 +325,7 @@ public class AddressBook
 
         AddressBook address = new AddressBook(null);
 
-        System.out.print("1.Add AddressBook \n2.Add Contact \n3.Delete \n4.Edit \n5.Search_Person_with_city " +
-                "\n6.Search_Person_with_State \n7.PersonCityDictionary \n8.PersonStateDictionary" +
-                "\n9.sort_by_City\n10.sort_by_State\n11.sort_by_Zip");
+        System.out.print("1.Add AddressBook \n2.Add Contact \n3.Delete \n4.Edit \n5.Search_Person_with_city \n6.Search_Person_with_State \n7.PersonCityDictionary \n8.PersonStateDictionary");
         int check=sc.nextInt();
         switch(check)
         {
@@ -405,18 +370,6 @@ public class AddressBook
                 address.DefaultContact();
                 address.PersonStateDictionary();
                 break;
-            case 9:
-                address.defaultBook();
-                address.DefaultContact();
-                address.sortbyCity();
-            case 10:
-                address.defaultBook();
-                address.DefaultContact();
-                address.sortbyState(); 
-            case 11:
-                address.defaultBook();
-                address.DefaultContact();
-                address.sortbyZip(); 
             default:
                 System.out.println("Invalid choice");
 
